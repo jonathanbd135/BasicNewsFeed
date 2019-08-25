@@ -7,6 +7,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
+
 fromaddr = "cybernewstryout@gmail.com"
 toaddr = "jonathan.bd135@gmail.com"
 
@@ -21,7 +22,6 @@ Subject = "Cyber News For: " + (now.strftime('%m/%d/%Y'))
 msg['Subject'] = Subject
 body = "Daily news for cyber from BBC, Cyware, and threatpost"
 msg.attach(MIMEText(body, 'plain'))
-
 
 filename = "CyberNews.txt"
 attachment = open("CyberNews.txt", "rb")

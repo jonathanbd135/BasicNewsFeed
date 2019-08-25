@@ -113,3 +113,4 @@ if __name__== "__main__":
     pool.join()
 
     Combine_files(results)
+    SendNewsByMail()
