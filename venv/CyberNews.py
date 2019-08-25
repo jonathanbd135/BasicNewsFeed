@@ -2,7 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 import webbrowser
 import threading
-import concurrent.futures
+from multiprocessing.pool import ThreadPool
+
+
 def BBCCyberNews():
     res = requests.get("https://www.bbc.com/news/topics/cz4pr2gd85qt/cyber-security")
     soup = BeautifulSoup(res.text,'lxml')
@@ -30,6 +32,8 @@ def BBCCyberNews():
         if(i>3):
                 break
 
+    return 'BBCnews.txt'
+
 
 def CywareNews():
 
@@ -54,6 +58,8 @@ def CywareNews():
         i += 1
         if (i > 3):
             break
+
+    return 'Cyware.txt'
 
 
 def ThreatPostVulnarbilities():
@@ -82,11 +88,13 @@ def ThreatPostVulnarbilities():
         i += 1
         if (i > 3):
             break
+
     return 'Vulnerbilities.txt'
 
-def Combine_files(fileone,filetwo,filethree):
 
-    filenames = [fileone,filetwo,filethree]
+def Combine_files(filenames):
+
+
     with open('CyberNews.txt', 'w') as CyberNews:
         for fname in filenames:
             with open(fname) as infile:
@@ -109,9 +117,19 @@ if __name__== "__main__":
     # t1.join()
     # # wait until thread 2 is completely executed
     # t2.join()
-    # # wait until thread 2 is completely executed
     # t3.join()
+    # # wait until thread 2 is completely executed
 
-    executor = concurrent.futures.ThreadPoolExecutor(3)
-    results = executor
+    results = []
+    pool = ThreadPool(3)
 
+    results.append(pool.apply_async(BBCCyberNews,()))
+    results.append(pool.apply_async(CywareNews,()))
+    results.append(pool.apply_async(ThreatPostVulnarbilities,()))
+    results = [r.get() for r in results]
+
+    pool.close()
+    pool.join()
+
+    print results
+    Combine_files(results)
