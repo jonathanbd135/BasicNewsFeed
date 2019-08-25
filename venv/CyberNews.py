@@ -94,7 +94,6 @@ def ThreatPostVulnarbilities():
 
 def Combine_files(filenames):
 
-
     with open('CyberNews.txt', 'w') as CyberNews:
         for fname in filenames:
             with open(fname) as infile:
@@ -102,24 +101,6 @@ def Combine_files(filenames):
                     CyberNews.write(line)
 
 if __name__== "__main__":
-    # t1 = threading.Thread(target=BBCCyberNews())
-    # t2 = threading.Thread(target=CywareNews())
-    # t3 = threading.Thread(target=ThreatPostVulnarbilities())
-    #
-    # # starting thread 1
-    # t1.start()
-    # # starting thread 2
-    # t2.start()
-    # # starting thread 3
-    # t3.start()
-    #
-    # # wait until thread 1 is completely executed
-    # t1.join()
-    # # wait until thread 2 is completely executed
-    # t2.join()
-    # t3.join()
-    # # wait until thread 2 is completely executed
-
     results = []
     pool = ThreadPool(3)
 
@@ -131,5 +112,4 @@ if __name__== "__main__":
     pool.close()
     pool.join()
 
-    print results
     Combine_files(results)
