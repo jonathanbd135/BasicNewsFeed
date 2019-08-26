@@ -3,7 +3,7 @@ import requests
 import webbrowser
 import threading
 from multiprocessing.pool import ThreadPool
-
+import SendNewsByMail
 
 def BBCCyberNews():
     res = requests.get("https://www.bbc.com/news/topics/cz4pr2gd85qt/cyber-security")
@@ -113,4 +113,4 @@ if __name__== "__main__":
     pool.join()
 
     Combine_files(results)
-    SendNewsByMail()
+    SendNewsByMail.Send()
